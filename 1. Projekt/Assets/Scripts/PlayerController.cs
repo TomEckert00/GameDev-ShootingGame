@@ -4,40 +4,35 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
     float speed = 10.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    public Vector3 lookDir;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += Vector3.left * Time.deltaTime * speed;
+            lookDir = Vector3.left;
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Vector3.right * Time.deltaTime * speed;
+            lookDir = Vector3.right;
         }
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += Vector3.forward * Time.deltaTime * speed;
+            lookDir = Vector3.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
             transform.position += Vector3.back * Time.deltaTime * speed;
+            lookDir = Vector3.back;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public Vector3 getLookDir()
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(collision.gameObject);
-        }
+        return lookDir;
     }
 }
