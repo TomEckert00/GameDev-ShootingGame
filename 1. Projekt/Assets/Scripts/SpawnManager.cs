@@ -7,24 +7,17 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject enemy;
     private float cooldown = 1.0f;
-    private bool gameIsActive;
     private Vector3 spawnPosition;
     private float xMin = -14;
     private float xMax = 14;
     private float zMin = -9;
     private float zMax = 9;
-    
+    private bool gameIsActive;
 
-    void Start()
+    public void StartGame()
     {
         gameIsActive = true;
         StartCoroutine(spawnEnemies());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator spawnEnemies()
@@ -37,4 +30,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void SetGameInactiv()
+    {
+        gameIsActive = false;
+    }
 }

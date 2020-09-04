@@ -1,11 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     float speed = 10.0f;
     public Vector3 lookDir;
+
+    public int health;
+    public int points;
+    private Vector3 startPos;
+
+    private GameManager gameManager;
+
+    void Start()
+    {
+        startPos = transform.position;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        health = 100;
+        points = 0;
+    }
 
     void Update()
     {
@@ -29,10 +44,27 @@ public class PlayerController : MonoBehaviour
             transform.position += Vector3.back * Time.deltaTime * speed;
             lookDir = Vector3.back;
         }
+        gameManager.SetHealthUI(health);
+        gameManager.SetPointUI(points);
     }
 
     public Vector3 getLookDir()
     {
         return lookDir;
+    }
+
+    public void Damage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            gameManager.SetHealthUI(health);
+            gameManager.EndGame();
+        }
+    }
+
+    public void AddPoints(int pointsToAdd)
+    {
+        points += pointsToAdd;
     }
 }
