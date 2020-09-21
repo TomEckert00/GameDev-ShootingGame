@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float speed = 10.0f;
+    public float speed = 10.0f;
     public Vector3 lookDir;
 
     public int health;
@@ -68,12 +68,22 @@ public class PlayerController : MonoBehaviour
         {
             HealAmount(50);
         }
+        if (name == "Speed")
+        {
+            StartCoroutine(SpeedUpForSeconds(5));
+        }
     }
 
     private void HealAmount(int amount)
     {
         health += amount;
         health = health >= 100 ? 100 : health;
+    }
+    private IEnumerator SpeedUpForSeconds(int duration)
+    {
+        speed = 20.0f;
+        yield return new WaitForSeconds(duration);
+        speed = 10.0f;
     }
 
     public Vector3 getLookDir()
