@@ -398,7 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d512d5b93669364daf3f7c9fb2e92e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8697035955759273814, guid: c7324575c8a283f4395f2ddbf53342c2, type: 3}
+  enemy: {fileID: 1277099866448903612, guid: ac5af493d0f695a4f944c556f8f1c28d, type: 3}
+  powerUps:
+  - {fileID: 5990449228947857243, guid: 3220e61c6e64aee49b9fca02137f9ee1, type: 3}
+  - {fileID: 5990449228947857243, guid: 81970c8d12dd91549acfb6e284395ca4, type: 3}
 --- !u!4 &145723505
 Transform:
   m_ObjectHideFlags: 0

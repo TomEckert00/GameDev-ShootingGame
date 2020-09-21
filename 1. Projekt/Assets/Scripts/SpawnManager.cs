@@ -6,8 +6,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemy;
+    public GameObject[] powerUps;
     private float cooldown = 1.0f;
-    private Vector3 spawnPosition;
     private float xMin = -14;
     private float xMax = 14;
     private float zMin = -9;
@@ -17,17 +17,37 @@ public class SpawnManager : MonoBehaviour
     public void StartGame()
     {
         gameIsActive = true;
-        StartCoroutine(spawnEnemies());
+        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerUps());
     }
 
-    IEnumerator spawnEnemies()
+    IEnumerator SpawnEnemies()
     {
         while (gameIsActive)
         {
-            spawnPosition = new Vector3(Random.Range(xMin, xMax), 0.5f, Random.Range(zMin, zMax));
-            Instantiate(enemy,spawnPosition, Quaternion.identity);
+            Instantiate(enemy, CreateRandomSpawnPos(), Quaternion.identity);
             yield return new WaitForSeconds(cooldown);
         }
+    }
+
+    private Vector3 CreateRandomSpawnPos()
+    {
+        return new Vector3(Random.Range(xMin, xMax), 0.5f, Random.Range(zMin, zMax));
+    }
+
+    IEnumerator SpawnPowerUps()
+    {
+        while (gameIsActive)
+        {
+            int randomIndex = CreateRandomIndex(powerUps);
+            Instantiate(powerUps[randomIndex], CreateRandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    private int CreateRandomIndex(GameObject[] array)
+    {
+        return Random.Range(0, array.Length);
     }
 
     public void SetGameInactiv()
