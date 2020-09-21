@@ -45,10 +45,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private int CreateRandomIndex(GameObject[] array)
-    {
-        return Random.Range(0, array.Length);
-    }
+    private int CreateRandomIndex(GameObject[] array) => Random.Range(0, array.Length);
 
     public void SetGameInactiv()
     {

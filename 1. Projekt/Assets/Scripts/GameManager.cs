@@ -43,12 +43,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void SetHealthUI(int playerHealth)
-    {
-        playerHealthUI.SetText("Gesundheit: " + playerHealth);
-    }
-    public void SetPointUI(int points)
-    {
-        pointsUI.SetText("Punktestand:" + points);
-    }
+    public void SetHealthUI(int playerHealth) => playerHealthUI.SetText("Gesundheit: " + playerHealth);
+    public void SetPointUI(int points) => pointsUI.SetText("Punktestand:" + points);
 }

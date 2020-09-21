@@ -17,10 +17,6 @@ public class BulletCollision : MonoBehaviour
             Destroy(col.gameObject);
             playerController.AddPoints(1);
         }
-        else
-        {
-            Debug.Log("Kein Gegner getroffen");
-        }
         Destroy(gameObject);
     }
 }
