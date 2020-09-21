@@ -48,6 +48,34 @@ public class PlayerController : MonoBehaviour
         gameManager.SetPointUI(points);
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("PowerUp"))
+        {
+            doPowerUpEffect(determineCollisionName(col));
+            Destroy(col.gameObject);
+        }
+    }
+
+    private static string determineCollisionName(Collision col)
+    {
+        return col.gameObject.GetComponent<PowerUp>().getPowerUpType();
+    }
+
+    private void doPowerUpEffect(string name)
+    {
+        if (name == "Heilung")
+        {
+            HealAmount(50);
+        }
+    }
+
+    private void HealAmount(int amount)
+    {
+        health += amount;
+        health = health >= 100 ? 100 : health;
+    }
+
     public Vector3 getLookDir()
     {
         return lookDir;

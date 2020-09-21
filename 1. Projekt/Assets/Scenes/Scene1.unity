@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8697035955759273814, guid: c7324575c8a283f4395f2ddbf53342c2, type: 3}
+  powerUp: {fileID: 5990449228947857243, guid: 3220e61c6e64aee49b9fca02137f9ee1, type: 3}
 --- !u!4 &145723505
 Transform:
   m_ObjectHideFlags: 0
