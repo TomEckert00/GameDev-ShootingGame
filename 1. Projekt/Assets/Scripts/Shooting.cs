@@ -10,6 +10,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     private GameObject player;
     private float speed = 30.0f;
+    private bool isMultiShotActive = false;
     
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,28 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         lookDir = playerController.getLookDir();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&isMultiShotActive)
         {
-            GameObject bullet = Instantiate(bulletPrefab, player.transform.position + (-2* lookDir), Quaternion.identity);
-            Rigidbody bulletRigidBody = bullet.GetComponent<Rigidbody>();
-            bulletRigidBody.AddForce(-lookDir * speed, ForceMode.Impulse);
+            CreateBullet(player.transform.position + (-2 * lookDir),-lookDir);
+            CreateBullet(player.transform.position + (2 * lookDir),lookDir);
+            CreateBullet(player.transform.position + (2 * Vector3.right),Vector3.right); 
+            CreateBullet(player.transform.position + (2 * Vector3.left),Vector3.left); 
         }
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            CreateBullet(player.transform.position + (-2 * lookDir), -lookDir);
+        }
+    }
+
+    private void CreateBullet(Vector3 spawnPos, Vector3 moveDir)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+        Rigidbody bulletRigidBody = bullet.GetComponent<Rigidbody>();
+        bulletRigidBody.AddForce(moveDir * speed, ForceMode.Impulse);
+    }
+
+    public void SetMultiShot(bool b)
+    {
+        isMultiShotActive = b;
     }
 }

@@ -7,17 +7,21 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
     public Vector3 lookDir;
+    private bool isMultishotActive = false;
 
     public int health;
     public int points;
     private Vector3 startPos;
 
+    private bool isFrozen = false;
     private GameManager gameManager;
+    Shooting shooting;
 
     void Start()
     {
         startPos = transform.position;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        shooting = gameObject.GetComponent<Shooting>();
         health = 100;
         points = 0;
     }
@@ -72,6 +76,22 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(SpeedUpForSeconds(5));
         }
+        if (name == "Points")
+        {
+            AddPoints(10);
+        }
+        if (name == "Unsterblich")
+        {
+            StartCoroutine(ActivateEternity(5));
+        }
+        if (name == "Freeze")
+        {
+            StartCoroutine(FreezeEnemies(5));
+        }
+        if (name == "Multi")
+        {
+            StartCoroutine(EnableMultiShot(5));
+        }
     }
 
     private void HealAmount(int amount)
@@ -84,6 +104,36 @@ public class PlayerController : MonoBehaviour
         speed = 20.0f;
         yield return new WaitForSeconds(duration);
         speed = 10.0f;
+    }
+
+    private IEnumerator ActivateEternity(int duration)
+    {
+        int current = health;
+        Debug.Log("start unsterblichkeit");
+        for(int i = 0; i< duration*10; i++)
+        {
+            health = current;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Debug.Log("End unsterblichkeit");
+    }
+
+    private IEnumerator FreezeEnemies(int duration)
+    {
+        isFrozen = true;
+        yield return new WaitForSeconds(5);
+        isFrozen = false;
+    }
+    public bool GetFrozenStatus()
+    {
+        return isFrozen;
+    }
+
+    private IEnumerator EnableMultiShot(int duration)
+    {
+        shooting.SetMultiShot(true);
+        yield return new WaitForSeconds(duration);
+        shooting.SetMultiShot(false);
     }
 
     public Vector3 getLookDir()
