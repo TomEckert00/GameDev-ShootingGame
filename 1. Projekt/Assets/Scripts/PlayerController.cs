@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour
         {
             AddPoints(10);
         }
+        if (name == "Unsterblich")
+        {
+            StartCoroutine(ActivateEternity(5));
+        }
     }
 
     private void HealAmount(int amount)
@@ -88,6 +92,18 @@ public class PlayerController : MonoBehaviour
         speed = 20.0f;
         yield return new WaitForSeconds(duration);
         speed = 10.0f;
+    }
+
+    private IEnumerator ActivateEternity(int duration)
+    {
+        int current = health;
+        Debug.Log("start unsterblichkeit");
+        for(int i = 0; i< duration*10; i++)
+        {
+            health = current;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Debug.Log("End unsterblichkeit");
     }
 
     public Vector3 getLookDir()

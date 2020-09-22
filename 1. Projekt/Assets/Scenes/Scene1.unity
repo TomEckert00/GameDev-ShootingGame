@@ -402,6 +402,8 @@ MonoBehaviour:
   powerUps:
   - {fileID: 5990449228947857243, guid: 3220e61c6e64aee49b9fca02137f9ee1, type: 3}
   - {fileID: 5990449228947857243, guid: 81970c8d12dd91549acfb6e284395ca4, type: 3}
+  - {fileID: 5990449228947857243, guid: 15fa8163d3adfa646af6cc81e62725b2, type: 3}
+  - {fileID: 5990449228947857243, guid: 8d6b4c6c20a329845acbeb5956d5b9b3, type: 3}
 --- !u!4 &145723505
 Transform:
   m_ObjectHideFlags: 0
@@ -1977,6 +1979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5e83cc77e7aa44e94b9a6c82a1f98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
   lookDir: {x: 0, y: 0, z: 0}
   health: 100
   points: 0
