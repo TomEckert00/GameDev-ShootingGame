@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
     public Vector3 lookDir;
+    private bool isMultishotActive = false;
 
     public int health;
     public int points;
@@ -14,11 +15,13 @@ public class PlayerController : MonoBehaviour
 
     private bool isFrozen = false;
     private GameManager gameManager;
+    Shooting shooting;
 
     void Start()
     {
         startPos = transform.position;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        shooting = gameObject.GetComponent<Shooting>();
         health = 100;
         points = 0;
     }
@@ -85,6 +88,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(FreezeEnemies(5));
         }
+        if (name == "Multi")
+        {
+            StartCoroutine(EnableMultiShot(5));
+        }
     }
 
     private void HealAmount(int amount)
@@ -120,6 +127,13 @@ public class PlayerController : MonoBehaviour
     public bool GetFrozenStatus()
     {
         return isFrozen;
+    }
+
+    private IEnumerator EnableMultiShot(int duration)
+    {
+        shooting.SetMultiShot(true);
+        yield return new WaitForSeconds(duration);
+        shooting.SetMultiShot(false);
     }
 
     public Vector3 getLookDir()
