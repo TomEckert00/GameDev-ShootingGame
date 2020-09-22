@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(SpeedUpForSeconds(5));
         }
+        if (name == "Points")
+        {
+            AddPoints(10);
+        }
     }
 
     private void HealAmount(int amount)
