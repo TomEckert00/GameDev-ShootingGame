@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int points;
     private Vector3 startPos;
 
+    private bool isFrozen = false;
     private GameManager gameManager;
 
     void Start()
@@ -80,6 +81,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(ActivateEternity(5));
         }
+        if (name == "Freeze")
+        {
+            StartCoroutine(FreezeEnemies(5));
+        }
     }
 
     private void HealAmount(int amount)
@@ -104,6 +109,17 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         Debug.Log("End unsterblichkeit");
+    }
+
+    private IEnumerator FreezeEnemies(int duration)
+    {
+        isFrozen = true;
+        yield return new WaitForSeconds(5);
+        isFrozen = false;
+    }
+    public bool GetFrozenStatus()
+    {
+        return isFrozen;
     }
 
     public Vector3 getLookDir()

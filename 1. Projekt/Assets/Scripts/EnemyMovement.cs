@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private GameObject player;
     private float speed = 5.0f;
     private int damage = 20;
+    private bool isfrozen;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,12 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerDirection = (player.transform.position - transform.position).normalized;
-        GetComponent<Rigidbody>().AddForce(playerDirection * speed);
+        isfrozen = player.GetComponent<PlayerController>().GetFrozenStatus();
+        if (isfrozen == false)
+        {
+            Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody>().AddForce(playerDirection * speed);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
