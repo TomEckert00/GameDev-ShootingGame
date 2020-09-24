@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public int points;
     private Vector3 startPos;
 
+    public GameObject ground;
+    public GameObject groundSlippery;
+
     private bool isFrozen = false;
     private GameManager gameManager;
     Shooting shooting;
@@ -92,6 +95,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(EnableMultiShot(5));
         }
+        if (name == "Slippery")
+        {
+            StartCoroutine(EnableSlippery(5));
+        }
     }
 
     private void HealAmount(int amount)
@@ -134,6 +141,16 @@ public class PlayerController : MonoBehaviour
         shooting.SetMultiShot(true);
         yield return new WaitForSeconds(duration);
         shooting.SetMultiShot(false);
+    }
+
+    private IEnumerator EnableSlippery(int duration)
+    {
+        ground.SetActive(false);
+        groundSlippery.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        ground.SetActive(true);
+        groundSlippery.SetActive(false);
+
     }
 
     public Vector3 getLookDir()
